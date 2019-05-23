@@ -62,9 +62,9 @@ class CategoryController extends BaseController
     public function store(BlogCategoryCreateRequest $request)
     {
         $data = $request->input();
-        if (empty($data['slug'])) {
+        /*if (empty($data['slug'])) {
             $data['slug'] = Str::slug($data['title']);
-        }
+        }*/
 
         $item = (new BlogCategory())->create($data);
 
@@ -103,7 +103,6 @@ class CategoryController extends BaseController
      * @param BlogCategoryUpdateRequest $request
      * @param int $id
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(BlogCategoryUpdateRequest $request, $id)
     {
@@ -117,9 +116,9 @@ class CategoryController extends BaseController
 
         $data = $request->all();
 
-        if (empty($data['slug'])) {
+        /*if (empty($data['slug'])) {
             $data['slug'] = Str::slug($data['title']);
-        }
+        }*/
 
         $result = $item->update($data);
 

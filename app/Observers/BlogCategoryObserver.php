@@ -17,6 +17,23 @@ class BlogCategoryObserver
         //
     }
 
+    public function creating(BlogCategory $blogCategory)
+    {
+        $this->setSlug($blogCategory);
+    }
+
+    /**
+     * Если поле слаг пустое, то заполняем его конвертацией заголовка.
+     *
+     * @param BlogCategory $blogCategory
+     */
+    protected function setSlug(BlogCategory $blogCategory)
+    {
+        if (empty($blogCategory->slug)) {
+            $blogCategory->slug = \Str::slug($blogCategory->title);
+        }
+    }
+
     /**
      * Handle the blog category "updated" event.
      *
@@ -26,6 +43,16 @@ class BlogCategoryObserver
     public function updated(BlogCategory $blogCategory)
     {
         //
+    }
+
+    /**
+     * Обработка перед обновлением записи
+     *
+     * @param BlogCategory $blogCategory
+     */
+    public function updating(BlogCategory $blogCategory)
+    {
+        $this->setSlug($blogCategory);
     }
 
     /**
